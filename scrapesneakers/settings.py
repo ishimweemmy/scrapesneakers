@@ -6,12 +6,15 @@
 #     https://docs.scrapy.org/en/latest/topics/settings.html
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
+from shutil import which
 
 BOT_NAME = "scrapesneakers"
 
 SPIDER_MODULES = ["scrapesneakers.spiders"]
 NEWSPIDER_MODULE = "scrapesneakers.spiders"
 
+# FEED_FORMAT = 'json'
+# FEED_URI = 'output.json'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = "scrapesneakers (+http://www.yourdomain.com)"
@@ -47,12 +50,17 @@ ROBOTSTXT_OBEY = True
 #SPIDER_MIDDLEWARES = {
 #    "scrapesneakers.middlewares.ScrapesneakersSpiderMiddleware": 543,
 #}
+  
+SELENIUM_DRIVER_NAME = 'chrome'
+SELENIUM_DRIVER_ARGUMENTS=[]
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    "scrapesneakers.middlewares.ScrapesneakersDownloaderMiddleware": 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+   # "scrapesneakers.middlewares.ScrapesneakersDownloaderMiddleware": 543,
+   'scrapy_selenium.SeleniumMiddleware': 800
+}
+
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
@@ -62,9 +70,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    "scrapesneakers.pipelines.ScrapesneakersPipeline": 300,
-#}
+ITEM_PIPELINES = {
+   "scrapesneakers.pipelines.ScrapesneakersPipeline": 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
